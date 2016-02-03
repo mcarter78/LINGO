@@ -6,23 +6,53 @@ function getRandomInt(min, max) {
   return Math.floor(Math.random() * (max - min)) + min;
 }
 
+//selects an Answer from the array of possible answers
 function selectAnswer() {
 		randomIndex = getRandomInt(0,lengthOfAnswers);
 		var currentAnswer = answers[randomIndex];
 		return currentAnswer;
 	}
 
+//finds the first letter of the seleceted answer and gives the player a hint by 
+// placing the first letter in the first square
 function fillFirstLetter(answer) {
 	var firstLetter = answer[0];
 	$('.cell:first').html(firstLetter);
 }
 
+//sets up the form for player input where the start button used to be under LINGO title
 function setUpUserInput(answer){
 	var guessbutton = '<label for "guess"></label><input id="guess"type=text maxlength></input><input id="guessbutton" type="submit" value="guess"/>';
 	$('#usercontrols').append(guessbutton);
 }
 
+function checkForCorrectWord() {
+	console.log('correctwordfunction');
+	if (guess === answer) {
+		console.log('congratulations on being the best');
+}
+}
 
+function correctLetterCorrectPlace() {
+	console.log('yo bro');
+	var guess = $('#guess').val();
+	lettersArray = [];
+	for (var i = 1; i < guess.length; i ++) {
+		lettersArray.push(guess[i]);
+	}
+	var letterCells = $('#firsttry').children();
+	for (var j = 0; j < guess.length; j ++) {
+		if (answer[j] === guess[j]) {
+			$(letterCells[j]).css('background-color', 'green');
+			$(letterCells[j]).attr('id', 'correctplace');
+			} 
+		}
+	}
+
+// set up the grid divs for the game board when submit button is clicked
+// selects answer
+// puts the first letter of answer in the first square
+// puts a form for player to guess, hides the start button
 function setGame() {
 	console.log('linked');
 
@@ -46,11 +76,11 @@ function setGame() {
 	setUpUserInput(answer);
 	// $('#startbutton').off('click',setGame);
 	$('#startbutton').hide();
-	$('#guessbutton').on('click', getResults);
+	$('#guessbutton').on('click', makeGuess);
 }
 
 
-function getResults() {
+function makeGuess() {
 	console.log('whatup');
 	var guess = $('#guess').val();
 	lettersArray = [];
@@ -63,6 +93,17 @@ function getResults() {
 		var letterValue = lettersArray[k];
 		$(letterCells[j]).html(letterValue);
 	}
+	checkForCorrectWord();
+	correctLetterCorrectPlace();
+}
+
+
+
+function correctLetterWrongPlace() {
+
+}
+
+function wrongLetterWrongPlace() {
 
 }
 
