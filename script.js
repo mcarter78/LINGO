@@ -4,6 +4,7 @@ var randomIndex;
 var answer;
 var lettersArray = [];
 var guess;
+var correctLettersIndex = [];
 function getRandomInt(min, max) {
   return Math.floor(Math.random() * (max - min)) + min;
 }
@@ -83,6 +84,12 @@ function makeGuess() {
 	checkForCorrectWord();
 	correctLetterWrongPlace();
 	correctLetterCorrectPlace();
+	$('#guessbutton').hide();
+	//change the button to guess again
+	var guessAgainButton = '<input id="guessAgainbutton" type="submit" value="Guess Again!"/>';
+	$('#usercontrols').append(guessAgainButton);
+	moveCorrectPlaceLetters();
+
 }
 
 function correctLetterCorrectPlace() {
@@ -93,10 +100,8 @@ function correctLetterCorrectPlace() {
 		if (answer[j] === guess[j]) {
 			$(letterCells[j]).css('background-color', 'green');
 			$(letterCells[j]).attr('id', 'correctplace');
-		}
-			// } else {
-			// 	$(letterCells[j]).attr('id', 'wrongplace');
-			// }
+			correctLettersIndex.push(j);
+			}
 		}
 	}
 
@@ -119,7 +124,9 @@ function correctLetterWrongPlace() {
 		var wrongplace = $.inArray(lettersArray[i], answerLetters, 1);
 		var j = i+1;
 			if (wrongplace === -1) {
+				//turns the wrongLetterWrongPostion cells red
 				$(letterCells[j]).css('background-color', 'red');
+				$(letterCells[j]).attr('id', 'wrongletter');
 			} else {
 		$(letterCells[j]).css('background-color', 'yellow');
 		$(letterCells[j]).attr('id', 'correctletter');
@@ -127,10 +134,22 @@ function correctLetterWrongPlace() {
 	}
 }
 
-	
-function wrongLetterWrongPlace() {
-
+function moveCorrectPlaceLetters() {
+	console.log('nextime');
+	var letterCells = $('#secondtry').children();
+	var letterCellsPast = $('#firsttry').children();
+	$(letterCells[0]).css('background-color', 'green');
+	$(letterCells[0]).attr('id', 'correctplace');
+	$(letterCells[0]).html(answer[0]);
+	for (var i = 1; i < correctLettersIndex.length; i++) {
+		var correctcell = correctLettersIndex[i];
+		$(letterCells[correctcell]).css('background-color', 'green');
+		$(letterCells[correctcell]).attr('id', 'correctplace');
+		var correctletter = lettersArray[correctcell-1];
+		$(letterCells[correctcell]).html(correctletter);
+	}
 }
+
 
 
 
