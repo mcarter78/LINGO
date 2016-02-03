@@ -1,4 +1,5 @@
-$('#startbutton').click(setGame);
+$(document).ready();
+$('#startbutton').on('click', setGame);
 
 function setGame() {
 	console.log('linked');
@@ -10,3 +11,4 @@ function setGame() {
 		}	
 	} idnumber ++;
 }
+
