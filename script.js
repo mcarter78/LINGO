@@ -37,6 +37,7 @@ function setGame() {
 	answer = selectAnswer();
 	console.log(answer);
 	fillFirstLetter(answer);
+	$('#startbutton').off('click',setGame);
 }
 
 
