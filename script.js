@@ -81,8 +81,8 @@ function makeGuess() {
 		$(letterCells[j]).html(letterValue);
 	}
 	checkForCorrectWord();
-	correctLetterCorrectPlace();
 	correctLetterWrongPlace();
+	correctLetterCorrectPlace();
 }
 
 function correctLetterCorrectPlace() {
@@ -107,13 +107,21 @@ function correctLetterWrongPlace() {
 	var letterCells = $('#firsttry').children();
 	answerLetters = [];
 		for (var i = 0; i < len; i ++) {
-		answerLetters.push(answer[i]);
-	}
+			if (answer[i] === guess[i]){
+				answerLetters.push(i);
+			} else {
+				answerLetters.push(answer[i]);
+			}
+			
+		}
+
 	for (i = 0; i < len-1; i++) {
 		var wrongplace = $.inArray(lettersArray[i], answerLetters, 1);
 		var j = i+1;
+			if (wrongplace != -1) {
 		$(letterCells[j]).css('background-color', 'yellow');
 		$(letterCells[j]).attr('id', 'correctletter');
+	} 
 	}
 }
 
