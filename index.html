@@ -13,53 +13,22 @@
 
 </head>
 <body>
-<div class="gameboard">
-	<div id="title">
+<div id="title">
 		<div class="title">L</div>
 		<div class="title">I</div>
 		<div class="title">N</div>
 		<div class="title">G</div>
 		<div class="title">O</div>
 	</div>
-	
-		<div id="first">
-			<div class="cell"></div>
-			<div class="cell"></div>
-			<div class="cell"></div>
-			<div class="cell"></div>
-			<div class="cell"></div>
-		</div>
-		<div id="second">
-			<div class="cell"></div>
-			<div class="cell"></div>
-			<div class="cell"></div>
-			<div class="cell"></div>
-			<div class="cell"></div>
-		</div>
-		<div id="third">
-			<div class="cell"></div>
-			<div class="cell"></div>
-			<div class="cell"></div>
-			<div class="cell"></div>
-			<div class="cell"></div>
-		</div>
-
-		<div id="fourth">
-			<div class="cell"></div>
-			<div class="cell"></div>
-			<div class="cell"></div>
-			<div class="cell"></div>
-			<div class="cell"></div>
-		</div>
-
-		<div id="fifth">
-			<div class="cell"></div>
-			<div class="cell"></div>
-			<div class="cell"></div>
-			<div class="cell"></div>
-			<div class="cell"></div>
-		</div>
+<div id="button">
+	<button id="startbutton">Let's Play</button>
 </div>
-
+<div class="gameboard">
+</div>
+<script type="text/javascript">
+	$(".cell").on('click', function(){ 
+		console.log(this.id + " was clicked");
+	});
+</script>
 </body>
 </html>
