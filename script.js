@@ -18,7 +18,8 @@ function fillFirstLetter(answer) {
 }
 
 function setUpUserInput(answer){
-	$('#usercontrols').append('<label for "guess"></label><input id="guess"type=text maxlength></input><input id="guessbutton" type="submit" value="guess"/>');
+	var guessbutton = '<label for "guess"></label><input id="guess"type=text maxlength></input><input id="guessbutton" type="submit" value="guess"/>';
+	$('#usercontrols').append(guessbutton);
 }
 
 
@@ -45,16 +46,24 @@ function setGame() {
 	setUpUserInput(answer);
 	// $('#startbutton').off('click',setGame);
 	$('#startbutton').hide();
+	$('#guessbutton').on('click', getResults);
 }
-$('#guessbutton').on('submit', getResults);
+
 
 function getResults() {
+	console.log('whatup');
 	var guess = $('#guess').val();
 	lettersArray = [];
-	for (var i = 1; i < answer.length; i ++) {
-		lettersArray.push(answer[i]);
+	for (var i = 1; i < guess.length; i ++) {
+		lettersArray.push(guess[i]);
 	}
-	return lettersArray;
+	var letterCells = $('#firsttry').children();
+	for (var j = 1; j < guess.length; j ++) {
+		var k = j-1;
+		var letterValue = lettersArray[k];
+		$(letterCells[j]).html(letterValue);
+	}
+
 }
 
 
