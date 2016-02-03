@@ -2,6 +2,8 @@ var answers = ["ghost", "sloth", "crazy"];
 var lengthOfAnswers = answers.length;
 var randomIndex;
 var answer;
+var lettersArray = [];
+var guess;
 function getRandomInt(min, max) {
   return Math.floor(Math.random() * (max - min)) + min;
 }
@@ -22,7 +24,7 @@ function fillFirstLetter(answer) {
 
 //sets up the form for player input where the start button used to be under LINGO title
 function setUpUserInput(answer){
-	var guessbutton = '<label for "guess"></label><input id="guess"type=text maxlength></input><input id="guessbutton" type="submit" value="guess"/>';
+	var guessbutton = '<label for "guess"></label><input id="guess"type=text maxlength=5></input><input id="guessbutton" type="submit" value="guess"/>';
 	$('#usercontrols').append(guessbutton);
 }
 
@@ -33,21 +35,7 @@ function checkForCorrectWord() {
 }
 }
 
-function correctLetterCorrectPlace() {
-	console.log('yo bro');
-	var guess = $('#guess').val();
-	lettersArray = [];
-	for (var i = 1; i < guess.length; i ++) {
-		lettersArray.push(guess[i]);
-	}
-	var letterCells = $('#firsttry').children();
-	for (var j = 0; j < guess.length; j ++) {
-		if (answer[j] === guess[j]) {
-			$(letterCells[j]).css('background-color', 'green');
-			$(letterCells[j]).attr('id', 'correctplace');
-			} 
-		}
-	}
+
 
 // set up the grid divs for the game board when submit button is clicked
 // selects answer
@@ -83,7 +71,6 @@ function setGame() {
 function makeGuess() {
 	console.log('whatup');
 	var guess = $('#guess').val();
-	lettersArray = [];
 	for (var i = 1; i < guess.length; i ++) {
 		lettersArray.push(guess[i]);
 	}
@@ -95,14 +82,42 @@ function makeGuess() {
 	}
 	checkForCorrectWord();
 	correctLetterCorrectPlace();
+	correctLetterWrongPlace();
 }
 
-
+function correctLetterCorrectPlace() {
+	console.log('nice guess');
+	var guess = $('#guess').val();
+	var letterCells = $('#firsttry').children();
+	for (var j = 0; j < guess.length; j ++) {
+		if (answer[j] === guess[j]) {
+			$(letterCells[j]).css('background-color', 'green');
+			$(letterCells[j]).attr('id', 'correctplace');
+		}
+			// } else {
+			// 	$(letterCells[j]).attr('id', 'wrongplace');
+			// }
+		}
+	}
 
 function correctLetterWrongPlace() {
-
+	console.log('rightletterwrongplace');
+	guess = $('#guess').val();
+	len = guess.length;
+	var letterCells = $('#firsttry').children();
+	answerLetters = [];
+		for (var i = 0; i < len; i ++) {
+		answerLetters.push(answer[i]);
+	}
+	for (i = 0; i < len-1; i++) {
+		var wrongplace = $.inArray(lettersArray[i], answerLetters, 1);
+		var j = i+1;
+		$(letterCells[j]).css('background-color', 'yellow');
+		$(letterCells[j]).attr('id', 'correctletter');
+	}
 }
 
+	
 function wrongLetterWrongPlace() {
 
 }
