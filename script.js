@@ -1,4 +1,4 @@
-var answers = ["ghost", "ghoul", "great"];
+var answers = ["ghost", "stump", "crazy"];
 var lengthOfAnswers = answers.length;
 var randomIndex;
 var answer;
@@ -14,7 +14,7 @@ function selectAnswer() {
 
 function fillFirstLetter(answer) {
 	var firstLetter = answer[0];
-	$();
+	$('.cell:first').html(firstLetter);
 }
 
 function setGame() {
@@ -32,20 +32,11 @@ function setGame() {
 	$('#fourthtry').append('<div class ="cell">');
 	$('#fifthtry').append('<div class ="cell">');
 	}
-
-
-	// for (var k = 1; k < 6; k++) {
-		// idnumber = k;
-		// $('.row').attr('id', idnumber);
-			// for (var j = 1; j < 6; j++) {
-				// idnumber = j;
-				// $('#idnumber').append('<div class="cell">');
-	// }
-	// }
 	
 		
 	answer = selectAnswer();
 	console.log(answer);
+	fillFirstLetter(answer);
 }
 
 
