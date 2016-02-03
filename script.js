@@ -118,7 +118,9 @@ function correctLetterWrongPlace() {
 	for (i = 0; i < len-1; i++) {
 		var wrongplace = $.inArray(lettersArray[i], answerLetters, 1);
 		var j = i+1;
-			if (wrongplace != -1) {
+			if (wrongplace === -1) {
+				$(letterCells[j]).css('background-color', 'red');
+			} else {
 		$(letterCells[j]).css('background-color', 'yellow');
 		$(letterCells[j]).attr('id', 'correctletter');
 	} 
