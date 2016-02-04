@@ -1,9 +1,10 @@
 var answers = ["ghost", "sloth", "crazy"];
 var lengthOfAnswers = answers.length;
+var lengthOfLegalWords = legalWords.length;
 var randomIndex;
 var answer;
 var guess;
-var lettersArray = []
+var lettersArray = [];
 var tries = 1;
 var correctLettersIndex = [];
 function getRandomInt(min, max) {
@@ -12,8 +13,8 @@ function getRandomInt(min, max) {
 
 //selects an Answer from the array of possible answers
 function selectAnswer() {
-		randomIndex = getRandomInt(0,lengthOfAnswers);
-		var currentAnswer = answers[randomIndex];
+		randomIndex = getRandomInt(0,lengthOfLegalWords);
+		var currentAnswer = legalWords[randomIndex];
 		return currentAnswer;
 	}
 
@@ -26,16 +27,10 @@ function fillFirstLetter(answer) {
 
 //sets up the form for player input where the start button used to be under LINGO title
 function setUpUserInput(answer){
-	var guessbutton = '<label for "guess"></label><input id="guess"type=text maxlength=5></input><input id="guessbutton" type="submit" value="guess"/>';
+	var guessbutton = '<label for "guess"></label><input id="guess"type=text maxlength=5 style="text-transform:uppercase" placeholder="Guess a 5 letter word"></input><input id="guessbutton" type="submit" value="guess"/>';
 	$('#usercontrols').append(guessbutton);
 }
 
-function checkForCorrectWord() {
-	console.log('correctwordfunction');
-	if (guess === answer) {
-		alert('congratulations on being the best');
-}
-}
 
 
 
@@ -95,8 +90,17 @@ function makeGuess() {
 	moveCorrectPlaceLetters();
 	tries ++;
 	correctLettersIndex = [];
+	if ((tries > 5) && (guess != answer)) {
+		youLose();
+	}
 
 
+}
+
+function checkForCorrectWord() {
+	console.log('correctwordfunction');
+
+	
 }
 
 function correctLetterCorrectPlace() {
@@ -139,10 +143,24 @@ function correctLetterWrongPlace() {
 		$(letterCells[j]).attr('id', 'correctletter');
 	} 
 	}
+	if (guess == answer) {
+			alert('congratulations on being the best!');
+	}
+}
+
+function youLose(){
+	$('.gameboard').append('<div class="row" id="reveal">');
+	for (var i = 0; i < 5; i ++){
+		$('#reveal').append('<div class ="cell">');
+		letterCells = $('#reveal').children();
+		$(letterCells[i]).css('background-color', 'pink');
+		$(letterCells[i]).html(answer[i]);
+	}
 }
 
 function moveCorrectPlaceLetters() {
 	console.log('nextime');
+	if (guess != answer){
 	var letterCells = $('#try' + (tries+1)).children();
 	var letterCellsPast = $('#try' + tries).children();
 	$(letterCells[0]).css('background-color', 'green');
@@ -155,6 +173,7 @@ function moveCorrectPlaceLetters() {
 		var correctletter = lettersArray[correctcell-1];
 		$(letterCells[correctcell]).html(correctletter);
 		}
+	}
 }
 
 

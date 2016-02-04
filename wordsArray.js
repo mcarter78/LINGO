@@ -12476,4 +12476,12 @@ var legalWords = [ 'AAHED',
   'ZYGON',
   'ZYMES',
   'ZYMIC' ];
-  
+//   var legalWords = [];
+//   lengthfull = legalWordsfull.length;
+//   function nonePlural() {
+//   	for (var i = 0; i < lengthfull; i++) {
+//   		if (legalWordsfull[i][4] != 'S') {
+//   		legalWords.push(legalWordsfull[i]);
+//   		} 
+//   }
+// }
