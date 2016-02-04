@@ -76,12 +76,13 @@ function makeGuess() {
 	for (var i = 1; i < guess.length; i ++) {
 		lettersArray.push(guess[i]);
 	}
-	var letterCells = $('#try' + tries).children();
+	var letterCells = $('#try1').children();
 	for (var j = 1; j < guess.length; j ++) {
 		var k = j-1;
 		var letterValue = lettersArray[k];
 		$(letterCells[j]).html(letterValue);
 	}
+	tries++;
 	checkForCorrectWord();
 	correctLetterWrongPlace();
 	correctLetterCorrectPlace();
@@ -91,15 +92,13 @@ function makeGuess() {
 	// $('#usercontrols').append(guessAgainButton);
 	$('#guessbutton').val("Guess Again!");
 	moveCorrectPlaceLetters();
-	tries ++;
-	correctLettersIndex = [];
 
 }
 
 function correctLetterCorrectPlace() {
 	console.log('nice guess');
 	var guess = $('#guess').val();
-	var letterCells = $('#try'+ tries).children();
+	var letterCells = $('#try' + tries).children();
 	for (var j = 0; j < guess.length; j ++) {
 		if (answer[j] === guess[j]) {
 			$(letterCells[j]).css('background-color', 'green');
@@ -140,8 +139,9 @@ function correctLetterWrongPlace() {
 
 function moveCorrectPlaceLetters() {
 	console.log('nextime');
-	var letterCells = $('#try' + (tries+1)).children();
-	var letterCellsPast = $('#try' + tries).children();
+	if (tries != 1) {
+	var letterCells = $('#try' + tries).children();
+	var letterCellsPast = $('#try' + (tries-1)).children();
 	$(letterCells[0]).css('background-color', 'green');
 	$(letterCells[0]).attr('id', 'correctplace');
 	$(letterCells[0]).html(answer[0]);
@@ -152,8 +152,8 @@ function moveCorrectPlaceLetters() {
 		var correctletter = lettersArray[correctcell-1];
 		$(letterCells[correctcell]).html(correctletter);
 		}
+	}
 }
-
 
 
 

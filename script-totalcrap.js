@@ -3,7 +3,7 @@ var lengthOfAnswers = answers.length;
 var randomIndex;
 var answer;
 var lettersArray = [];
-var guess;
+//var guess;
 var tries = 1;
 var correctLettersIndex = [];
 function getRandomInt(min, max) {
@@ -32,8 +32,9 @@ function setUpUserInput(answer){
 
 function checkForCorrectWord() {
 	console.log('correctwordfunction');
+	var guess = $('#guess').val();
 	if (guess === answer) {
-		console.log('congratulations on being the best');
+		alert('congratulations on being the best');
 }
 }
 
@@ -45,7 +46,6 @@ function checkForCorrectWord() {
 // puts a form for player to guess, hides the start button
 function setGame() {
 	console.log('linked');
-
 	$('.gameboard').append('<div class="row" id="try1">');
 	$('.gameboard').append('<div class="row" id="try2">');
 	$('.gameboard').append('<div class="row" id="try3">');
@@ -66,7 +66,7 @@ function setGame() {
 	setUpUserInput(answer);
 	// $('#startbutton').off('click',setGame);
 	$('#startbutton').hide();
-	$('#guessbutton').on('click', makeGuess);
+	$('#guessbutton').on('click', makeGuess());
 }
 
 
@@ -76,7 +76,7 @@ function makeGuess() {
 	for (var i = 1; i < guess.length; i ++) {
 		lettersArray.push(guess[i]);
 	}
-	var letterCells = $('#try' + tries).children();
+	var letterCells = $('#try'+ tries).children();
 	for (var j = 1; j < guess.length; j ++) {
 		var k = j-1;
 		var letterValue = lettersArray[k];
@@ -111,7 +111,7 @@ function correctLetterCorrectPlace() {
 
 function correctLetterWrongPlace() {
 	console.log('rightletterwrongplace');
-	guess = $('#guess').val();
+	var guess = $('#guess').val();
 	len = guess.length;
 	var letterCells = $('#try' + tries).children();
 	answerLetters = [];
@@ -140,8 +140,8 @@ function correctLetterWrongPlace() {
 
 function moveCorrectPlaceLetters() {
 	console.log('nextime');
-	var letterCells = $('#try' + (tries+1)).children();
-	var letterCellsPast = $('#try' + tries).children();
+	var letterCells = $('#try'+ (tries+1)).children();
+	var letterCellsPast = $('#try' + (tries)).children();
 	$(letterCells[0]).css('background-color', 'green');
 	$(letterCells[0]).attr('id', 'correctplace');
 	$(letterCells[0]).html(answer[0]);
@@ -152,8 +152,8 @@ function moveCorrectPlaceLetters() {
 		var correctletter = lettersArray[correctcell-1];
 		$(letterCells[correctcell]).html(correctletter);
 		}
+	
 }
-
 
 
 
