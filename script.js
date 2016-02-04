@@ -2,8 +2,8 @@ var answers = ["ghost", "sloth", "crazy"];
 var lengthOfAnswers = answers.length;
 var randomIndex;
 var answer;
-var lettersArray = [];
 var guess;
+var lettersArray = []
 var tries = 1;
 var correctLettersIndex = [];
 function getRandomInt(min, max) {
@@ -33,7 +33,7 @@ function setUpUserInput(answer){
 function checkForCorrectWord() {
 	console.log('correctwordfunction');
 	if (guess === answer) {
-		console.log('congratulations on being the best');
+		alert('congratulations on being the best');
 }
 }
 
@@ -72,6 +72,7 @@ function setGame() {
 
 function makeGuess() {
 	console.log('whatup');
+	lettersArray = [];
 	var guess = $('#guess').val();
 	for (var i = 1; i < guess.length; i ++) {
 		lettersArray.push(guess[i]);
@@ -90,9 +91,11 @@ function makeGuess() {
 	// var guessAgainButton = '<input id="guessbutton" type="submit" value="Guess Again!"/>';
 	// $('#usercontrols').append(guessAgainButton);
 	$('#guessbutton').val("Guess Again!");
+
 	moveCorrectPlaceLetters();
 	tries ++;
 	correctLettersIndex = [];
+
 
 }
 
