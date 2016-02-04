@@ -1,3 +1,4 @@
+
 .title {
 	height: 80px;
 	width: 80px;
@@ -6,7 +7,9 @@
 	border-radius: 40px;
 	background-color: blue;
 	color: white;
-	font-size: 4.5em
+	font-size: 4em;
+	font-family: 'Fredoka One', cursive;
+	margin: 2px;
 }
 #title {
 	text-align: center;
@@ -17,8 +20,11 @@
 	display: inline-block;
 	border: 1px solid black;
 	vertical-align: top;
-	font-size: 4em;
+	font-size: 3.5em;
+	font-family: 'Nunito', sans-serif;
 	/*color: white;*/
+	/*border-radius: 10px;*/
+	margin: 2px;
 }
 .gameboard {
 	text-align: center;
@@ -30,8 +36,53 @@
 	display: block;
 	position:relative;
 }
-
-#guess {
+button {
 	margin-top:1.5em;
 }
+.legend {
+	font-family: 'Nunito', sans-serif;
+	font-size: 1em;
+	margin: 3px;
+}
 
+@media (max-width: 600px) {
+.title {
+	height: 60px;
+	width: 60px;
+	border-radius: 30px;
+	font-size: 3em;
+	}
+.cell {
+	height: 60px;
+	width: 60px;
+	font-size: 3em;
+}
+}
+
+@media (max-width: 355px) {
+.title {
+	height: 40px;
+	width: 40px;
+	border-radius: 20px;
+	font-size: 2em;
+	}
+.cell {
+	height: 40px;
+	width: 40px;
+	font-size: 2em;
+}
+}
+
+@media (max-width: 255px) {
+.title {
+	height: 30px;
+	width: 30px;
+	border-radius: 15px;
+	font-size: 1.5em;
+	}
+.cell {
+	height: 30px;
+	width: 30px;
+	font-size: 1.5em;
+}
+}

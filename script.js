@@ -14,7 +14,7 @@ function getRandomInt(min, max) {
 //selects an Answer from the array of possible answers
 function selectAnswer() {
 		randomIndex = getRandomInt(0,lengthOfLegalWords);
-		var currentAnswer = legalWords[randomIndex];
+		var currentAnswer = legalWords[randomIndex].toLowerCase();
 		return currentAnswer;
 	}
 
@@ -27,7 +27,15 @@ function fillFirstLetter(answer) {
 
 //sets up the form for player input where the start button used to be under LINGO title
 function setUpUserInput(answer){
-	var guessbutton = '<label for "guess"></label><input id="guess"type=text maxlength=5 style="text-transform:uppercase" placeholder="Guess a 5 letter word"></input><input id="guessbutton" type="submit" value="guess"/>';
+	var instructions = '<div class = "legend" id="intro">Here is the first letter! Try to guess the five letter mystery word!</div>';
+	$('#usercontrols').append(instructions);
+	var legendgreen = '<div class = "legend" id="green">Green = Correct Letter, Correct Place</div>';
+	$('#usercontrols').append(legendgreen);
+	var legendyellow = '<div class = "legend" id="yellow">Yellow = Correct Letter, Wrong Place</div>';
+	$('#usercontrols').append(legendyellow);
+	var legendred = '<div class = "legend" id="red">Red = Wrong Letter, Wrong Place</div>';
+	$('#usercontrols').append(legendred);
+	var guessbutton = '<label for "guess"></label><input id="guess"type=text maxlength=5" placeholder="Guess a 5 letter word"></input><input id="guessbutton" type="submit" value="guess"/>';
 	$('#usercontrols').append(guessbutton);
 }
 
@@ -61,7 +69,14 @@ function setGame() {
 	setUpUserInput(answer);
 	// $('#startbutton').off('click',setGame);
 	$('#startbutton').hide();
-	$('#guessbutton').on('click', makeGuess);
+
+	$('#guessbutton').click(makeGuess);
+	$('body').keypress(function(event) {
+ 		if ( event.keycode == 13 ) {
+   			$('#guessbutton').click();
+				return false;
+ 		}
+ });
 }
 
 
@@ -75,12 +90,13 @@ function makeGuess() {
 	var letterCells = $('#try' + tries).children();
 	for (var j = 1; j < guess.length; j ++) {
 		var k = j-1;
-		var letterValue = lettersArray[k];
+		var letterValue = lettersArray[k].toLowerCase();
 		$(letterCells[j]).html(letterValue);
 	}
-	checkForCorrectWord();
+	
 	correctLetterWrongPlace();
 	correctLetterCorrectPlace();
+	checkForCorrectWord();
 	// $('#guessbutton').hide();
 	//change the button to guess again
 	// var guessAgainButton = '<input id="guessbutton" type="submit" value="Guess Again!"/>';
@@ -93,13 +109,23 @@ function makeGuess() {
 	if ((tries > 5) && (guess != answer)) {
 		youLose();
 	}
+	if ((tries > 5) || (guess === answer)) {
+		$('.gameboard').append('<button id="playagain">Play Again!</button>');
+		$('#playagain').on('click', function(){
+			console.log('playagain');
+			location.reload();
+		});
+	}
+	
 
 
 }
 
 function checkForCorrectWord() {
 	console.log('correctwordfunction');
-
+	if (guess === answer) {
+			alert('congratulations on being the best!');
+	}
 	
 }
 
@@ -143,9 +169,7 @@ function correctLetterWrongPlace() {
 		$(letterCells[j]).attr('id', 'correctletter');
 	} 
 	}
-	if (guess == answer) {
-			alert('congratulations on being the best!');
-	}
+	
 }
 
 function youLose(){
