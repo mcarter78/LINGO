@@ -176,6 +176,7 @@ function correctLetterWrongPlace() {
 }
 
 function youLose(){
+	//add a new row that reveals the answer
 	$('.gameboard').append('<div class="row" id="reveal">');
 	for (var i = 0; i < 5; i ++){
 		$('#reveal').append('<div class ="cell">');
@@ -187,6 +188,8 @@ function youLose(){
 
 function moveCorrectPlaceLetters() {
 	if (guess != answer){
+		// looks at the past row and then puts the letters that have been guessed
+		// correctly into the new row 
 	var letterCells = $('#try' + (tries+1)).children();
 	var letterCellsPast = $('#try' + tries).children();
 	$(letterCells[0]).css('background-color', 'rgba(50, 236, 42, 0.7)');
