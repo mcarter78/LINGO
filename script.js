@@ -1,6 +1,6 @@
 var answers = ["ghost", "sloth", "crazy"];
 var lengthOfAnswers = answers.length;
-var lengthOfLegalWords = legalWords.length;
+var lengthOfCommonWords = commonwords.length;
 var randomIndex;
 var answer;
 var guess;
@@ -13,8 +13,8 @@ function getRandomInt(min, max) {
 
 //selects an Answer from the array of possible answers
 function selectAnswer() {
-		randomIndex = getRandomInt(0,lengthOfLegalWords);
-		var currentAnswer = legalWords[randomIndex].toLowerCase();
+		randomIndex = getRandomInt(0,lengthOfCommonWords);
+		var currentAnswer = commonwords[randomIndex].toLowerCase();
 		return currentAnswer;
 	}
 
@@ -35,7 +35,13 @@ function setUpUserInput(answer){
 	$('#usercontrols').append(legendyellow);
 	var legendred = '<div class = "legend" id="red">Red = Wrong Letter, Wrong Place</div>';
 	$('#usercontrols').append(legendred);
-	var guessbutton = '<label for "guess"></label><input id="guess"type=text maxlength=5" placeholder="Guess a 5 letter word"></input><input id="guessbutton" type="submit" value="guess"/>';
+	var instructionshidebutton = '<button id="hiderules">Hide Rules</button>';
+	$('#usercontrols').append(instructionshidebutton);
+	$('#hiderules').on('click', function(){
+		$('.legend').hide();
+		$('#hiderules').hide();
+	});
+	var guessbutton = '<label for "guess"></label><input id="guess"type=text maxlength=5" autofocus placeholder="Guess a 5 letter word"><button id="guessbutton" type="submit" value="guess">Guess</button>';
 	$('#usercontrols').append(guessbutton);
 }
 
@@ -74,6 +80,7 @@ function setGame() {
 	$('body').keypress(function(event) {
  		if ( event.keycode == 13 ) {
    			$('#guessbutton').click();
+   			console.log(event);
 				return false;
  		}
  });
@@ -116,6 +123,7 @@ function makeGuess() {
 			location.reload();
 		});
 	}
+	$('#guess').val(' ');
 	
 
 
@@ -135,7 +143,7 @@ function correctLetterCorrectPlace() {
 	var letterCells = $('#try'+ tries).children();
 	for (var j = 0; j < guess.length; j ++) {
 		if (answer[j] === guess[j]) {
-			$(letterCells[j]).css('background-color', 'green');
+			$(letterCells[j]).css('background-color', '#32EC2A');
 			$(letterCells[j]).attr('id', 'correctplace');
 			correctLettersIndex.push(j);
 			}
@@ -162,10 +170,10 @@ function correctLetterWrongPlace() {
 		var j = i+1;
 			if (wrongplace === -1) {
 				//turns the wrongLetterWrongPostion cells red
-				$(letterCells[j]).css('background-color', 'red');
+				$(letterCells[j]).css('background-color', '#E22831');
 				$(letterCells[j]).attr('id', 'wrongletter');
 			} else {
-		$(letterCells[j]).css('background-color', 'yellow');
+		$(letterCells[j]).css('background-color', '#F6FF69');
 		$(letterCells[j]).attr('id', 'correctletter');
 	} 
 	}
@@ -177,7 +185,7 @@ function youLose(){
 	for (var i = 0; i < 5; i ++){
 		$('#reveal').append('<div class ="cell">');
 		letterCells = $('#reveal').children();
-		$(letterCells[i]).css('background-color', 'pink');
+		$(letterCells[i]).css('background-color', '#00D6FF');
 		$(letterCells[i]).html(answer[i]);
 	}
 }
@@ -187,12 +195,12 @@ function moveCorrectPlaceLetters() {
 	if (guess != answer){
 	var letterCells = $('#try' + (tries+1)).children();
 	var letterCellsPast = $('#try' + tries).children();
-	$(letterCells[0]).css('background-color', 'green');
+	$(letterCells[0]).css('background-color', '#32EC2A');
 	$(letterCells[0]).attr('id', 'correctplace');
 	$(letterCells[0]).html(answer[0]);
 	for (var i = 1; i < correctLettersIndex.length; i++) {
 		var correctcell = correctLettersIndex[i];
-		$(letterCells[correctcell]).css('background-color', 'green');
+		$(letterCells[correctcell]).css('background-color', '#32EC2A');
 		$(letterCells[correctcell]).attr('id', 'correctplace');
 		var correctletter = lettersArray[correctcell-1];
 		$(letterCells[correctcell]).html(correctletter);

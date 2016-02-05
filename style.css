@@ -1,34 +1,55 @@
-
+/*html {
+	background: white;
+	background-size: cover;
+	height: 1000px
+}*/
 .title {
-	height: 80px;
-	width: 80px;
+	height: 100px;
+	width: 100px;
 	display: inline-block;
 	text-align: center;
-	border-radius: 40px;
-	background-color: blue;
+	border-radius: 50px;
+	background: #00D6FF;
 	color: white;
-	font-size: 4em;
+	font-size: 5em;
 	font-family: 'Fredoka One', cursive;
 	margin: 2px;
 }
 #title {
 	text-align: center;
 }
+button {
+	font-family: 'Nunito', sans-serif;
+	height: 30px;
+	width: 60px;
+	background-color: #00D6FF;
+	color: white;
+	border: none;
+	display: block;
+    margin: 0 auto;
+    margin-top: 3px;
+    font-size: 1em;
+}
+#startbutton {
+	width: 150px;
+    height: 50px;
+    font-size: 1.5em;
+    margin-top: 20px;
+}
 .cell {
 	height: 80px;
 	width: 80px;
 	display: inline-block;
-	border: 1px solid black;
+	border: 1px solid #00D6FF;
 	vertical-align: top;
 	font-size: 3.5em;
 	font-family: 'Nunito', sans-serif;
-	/*color: white;*/
 	/*border-radius: 10px;*/
 	margin: 2px;
+	color: #007E7F;
 }
 .gameboard {
 	text-align: center;
-	animation-delay: 3s;
 }
 #usercontrols {
 	text-align: center;
@@ -36,13 +57,32 @@
 	display: block;
 	position:relative;
 }
-button {
-	margin-top:1.5em;
+#guess {
+	margin: 10px;
+	width:250px;
+	height: 30px;
+	font-family: 'Nunito', sans-serif;
+	font-size: 1em;
+}
+
+#playagain {
+	width: 150px;
+    height: 50px;
+    font-size: 1.5em;
 }
 .legend {
 	font-family: 'Nunito', sans-serif;
 	font-size: 1em;
 	margin: 3px;
+	color: #007E7F;
+}
+#hiderules {
+	display: block;
+    text-align: center;
+    margin: 0 auto;
+    border: none;
+    color: white;
+    width: 100px;
 }
 
 @media (max-width: 600px) {
