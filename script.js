@@ -8,6 +8,11 @@ var lettersArray = [];
 var tries = 1;
 var correctLettersIndex = [];
 
+$( window ).load(function() {
+  $('#startbutton').on('click', setGame);
+});
+
+
 function getRandomInt(min, max) {
   return Math.floor(Math.random() * (max - min)) + min;
 }
@@ -72,7 +77,6 @@ function setGame() {
 	answer = selectAnswer();
 	fillFirstLetter(answer);
 	setUpUserInput(answer);
-	// $('#startbutton').off('click',setGame);
 	$('#startbutton').hide();
 
 	$('#guessbutton').click(makeGuess);
@@ -102,10 +106,8 @@ function makeGuess() {
 	correctLetterWrongPlace();
 	correctLetterCorrectPlace();
 	checkForCorrectWord();
-	// $('#guessbutton').hide();
 	//change the button to guess again
-	// var guessAgainButton = '<input id="guessbutton" type="submit" value="Guess Again!"/>';
-	// $('#usercontrols').append(guessAgainButton);
+
 	$('#guessbutton').val("Guess Again!");
 	$('#guess').focus();
 
