@@ -22,7 +22,7 @@ function selectAnswer() {
 		return currentAnswer;
 	}
 
-//finds the first letter of the seleceted answer and gives the player a hint by 
+//finds the first letter of the seleceted answer and gives the player a hint by
 // placing the first letter in the first square
 function fillFirstLetter(answer) {
 	var firstLetter = answer[0];
@@ -45,7 +45,7 @@ function setUpUserInput(answer){
 		$('.legend').hide();
 		$('#hiderules').hide();
 	});
-	var guessbutton = '<label for "guess"></label><input id="guess"type=text maxlength=5" autofocus placeholder="Guess a 5 letter word"><button id="guessbutton" type="submit" value="guess">Guess</button>';
+	var guessbutton = '<form id="guess-form"><input id="guess"type=text maxlength=5" autofocus placeholder="Guess a 5 letter word"><button id="guessbutton" type="submit" value="Guess">Guess</button></form>';
 	$('#usercontrols').append(guessbutton);
 }
 
@@ -70,25 +70,26 @@ function setGame() {
 	$('#try4').append('<div class ="cell">');
 	$('#try5').append('<div class ="cell">');
 	}
-	
-		
+
+
 	answer = selectAnswer();
 	fillFirstLetter(answer);
 	setUpUserInput(answer);
 	$('#startbutton').hide();
 
-	$('#guessbutton').click(makeGuess);
-	$('body').keypress(function(event) {
- 		if ( event.keycode == 13 ) {
-   			$('#guessbutton').click();
-   			console.log(event);
-				return false;
- 		}
- });
+	$('#guess-form').on("submit", makeGuess);
+	// $('#guess').submit(function(event) {
+ // 		if ( event.keycode == 13 ) {
+  //  			$('#guessbutton').click();
+  //  			console.log(event);
+	// 			return false;
+ // 		}
+  // });
 }
 
 
-function makeGuess() {
+function makeGuess(e) {
+  e.preventDefault();
 	lettersArray = [];
 	var guess = $('#guess').val().toLowerCase();
 	for (var i = 1; i < guess.length; i ++) {
@@ -100,7 +101,7 @@ function makeGuess() {
 		var letterValue = lettersArray[k].toLowerCase();
 		$(letterCells[j]).html(letterValue);
 	}
-	
+
 	correctLetterWrongPlace();
 	correctLetterCorrectPlace();
 	checkForCorrectWord();
@@ -124,7 +125,7 @@ function makeGuess() {
 		});
 	}
 	$('#guess').val('');
-	
+
 
 
 }
@@ -133,7 +134,7 @@ function checkForCorrectWord() {
 	if (guess === answer) {
 			alert('congratulations on being the best!');
 	}
-	
+
 }
 
 function correctLetterCorrectPlace() {
@@ -144,7 +145,7 @@ function correctLetterCorrectPlace() {
 			$(letterCells[j]).css('background-color', 'rgba(50, 236, 42, 0.7)');
 			$(letterCells[j]).attr('id', 'correctplace');
 			correctLettersIndex.push(j);
-			// this index keeps track of where the correct letters are in the row so 
+			// this index keeps track of where the correct letters are in the row so
 			// they can be prompted for you in the next row
 			}
 		}
@@ -161,7 +162,7 @@ function correctLetterWrongPlace() {
 			} else {
 				answerLetters.push(answer[i]);
 			}
-			
+
 		}
 
 	for (i = 0; i < len-1; i++) {
@@ -174,9 +175,9 @@ function correctLetterWrongPlace() {
 			} else {
 		$(letterCells[j]).css('background-color', '#F6FF69');
 		$(letterCells[j]).attr('id', 'correctletter');
-	} 
 	}
-	
+	}
+
 }
 
 function youLose(){
@@ -193,7 +194,7 @@ function youLose(){
 function moveCorrectPlaceLetters() {
 	if (guess != answer){
 		// looks at the past row and then puts the letters that have been guessed
-		// correctly into the new row 
+		// correctly into the new row
 	var letterCells = $('#try' + (tries+1)).children();
 	var letterCellsPast = $('#try' + tries).children();
 	$(letterCells[0]).css('background-color', 'rgba(50, 236, 42, 0.7)');
@@ -208,9 +209,3 @@ function moveCorrectPlaceLetters() {
 		}
 	}
 }
-
-
-
-
-
-
