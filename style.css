@@ -111,6 +111,9 @@ button {
 	width: 40px;
 	font-size: 2em;
 }
+.legend {
+	font-size: .75em;
+}
 }
 
 @media (max-width: 255px) {
@@ -124,5 +127,10 @@ button {
 	height: 30px;
 	width: 30px;
 	font-size: 1.5em;
+}
+button {
+	height: 15px;
+	width: 30;
+	font-size: .5em;
 }
 }
