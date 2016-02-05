@@ -54,7 +54,6 @@ function setUpUserInput(answer){
 // puts the first letter of answer in the first square
 // puts a form for player to guess, hides the start button
 function setGame() {
-	console.log('linked');
 
 	$('.gameboard').append('<div class="row" id="try1">');
 	$('.gameboard').append('<div class="row" id="try2">');
@@ -71,7 +70,6 @@ function setGame() {
 	
 		
 	answer = selectAnswer();
-	console.log(answer);
 	fillFirstLetter(answer);
 	setUpUserInput(answer);
 	// $('#startbutton').off('click',setGame);
@@ -89,9 +87,8 @@ function setGame() {
 
 
 function makeGuess() {
-	console.log('whatup');
 	lettersArray = [];
-	var guess = $('#guess').val();
+	var guess = $('#guess').val().toLowerCase();
 	for (var i = 1; i < guess.length; i ++) {
 		lettersArray.push(guess[i]);
 	}
@@ -121,7 +118,6 @@ function makeGuess() {
 	if ((tries > 5) || (guess === answer)) {
 		$('.gameboard').append('<button id="playagain">Play Again!</button>');
 		$('#playagain').on('click', function(){
-			console.log('playagain');
 			location.reload();
 		});
 	}
@@ -132,7 +128,6 @@ function makeGuess() {
 }
 
 function checkForCorrectWord() {
-	console.log('correctwordfunction');
 	if (guess === answer) {
 			alert('congratulations on being the best!');
 	}
@@ -140,7 +135,6 @@ function checkForCorrectWord() {
 }
 
 function correctLetterCorrectPlace() {
-	console.log('nice guess');
 	var guess = $('#guess').val();
 	var letterCells = $('#try'+ tries).children();
 	for (var j = 0; j < guess.length; j ++) {
@@ -153,7 +147,6 @@ function correctLetterCorrectPlace() {
 	}
 
 function correctLetterWrongPlace() {
-	console.log('rightletterwrongplace');
 	guess = $('#guess').val();
 	len = guess.length;
 	var letterCells = $('#try' + tries).children();
@@ -193,7 +186,6 @@ function youLose(){
 }
 
 function moveCorrectPlaceLetters() {
-	console.log('nextime');
 	if (guess != answer){
 	var letterCells = $('#try' + (tries+1)).children();
 	var letterCellsPast = $('#try' + tries).children();
