@@ -7,11 +7,12 @@ var guess;
 var lettersArray = [];
 var tries = 1;
 var correctLettersIndex = [];
+
 function getRandomInt(min, max) {
   return Math.floor(Math.random() * (max - min)) + min;
 }
 
-//selects an Answer from the array of possible answers
+//selects an Answer from the array of possible answers in commonwords
 function selectAnswer() {
 		randomIndex = getRandomInt(0,lengthOfCommonWords);
 		var currentAnswer = commonwords[randomIndex].toLowerCase();
@@ -109,6 +110,7 @@ function makeGuess() {
 	// var guessAgainButton = '<input id="guessbutton" type="submit" value="Guess Again!"/>';
 	// $('#usercontrols').append(guessAgainButton);
 	$('#guessbutton').val("Guess Again!");
+	$('#guess').focus();
 
 	moveCorrectPlaceLetters();
 	tries ++;
@@ -123,7 +125,7 @@ function makeGuess() {
 			location.reload();
 		});
 	}
-	$('#guess').val(' ');
+	$('#guess').val('');
 	
 
 
@@ -143,7 +145,7 @@ function correctLetterCorrectPlace() {
 	var letterCells = $('#try'+ tries).children();
 	for (var j = 0; j < guess.length; j ++) {
 		if (answer[j] === guess[j]) {
-			$(letterCells[j]).css('background-color', '#32EC2A');
+			$(letterCells[j]).css('background-color', 'rgba(50, 236, 42, 0.7)');
 			$(letterCells[j]).attr('id', 'correctplace');
 			correctLettersIndex.push(j);
 			}
@@ -170,7 +172,7 @@ function correctLetterWrongPlace() {
 		var j = i+1;
 			if (wrongplace === -1) {
 				//turns the wrongLetterWrongPostion cells red
-				$(letterCells[j]).css('background-color', '#E22831');
+				$(letterCells[j]).css('background-color', 'rgba(255, 34, 0, .7))');
 				$(letterCells[j]).attr('id', 'wrongletter');
 			} else {
 		$(letterCells[j]).css('background-color', '#F6FF69');
@@ -195,12 +197,12 @@ function moveCorrectPlaceLetters() {
 	if (guess != answer){
 	var letterCells = $('#try' + (tries+1)).children();
 	var letterCellsPast = $('#try' + tries).children();
-	$(letterCells[0]).css('background-color', '#32EC2A');
+	$(letterCells[0]).css('background-color', 'rgba(50, 236, 42, 0.7)');
 	$(letterCells[0]).attr('id', 'correctplace');
 	$(letterCells[0]).html(answer[0]);
 	for (var i = 1; i < correctLettersIndex.length; i++) {
 		var correctcell = correctLettersIndex[i];
-		$(letterCells[correctcell]).css('background-color', '#32EC2A');
+		$(letterCells[correctcell]).css('background-color', 'rgba(50, 236, 42, 0.7)');
 		$(letterCells[correctcell]).attr('id', 'correctplace');
 		var correctletter = lettersArray[correctcell-1];
 		$(letterCells[correctcell]).html(correctletter);

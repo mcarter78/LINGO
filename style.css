@@ -46,7 +46,7 @@ button {
 	font-family: 'Nunito', sans-serif;
 	/*border-radius: 10px;*/
 	margin: 2px;
-	color: #007E7F;
+	color: #5C6666;
 }
 .gameboard {
 	text-align: center;
@@ -74,7 +74,7 @@ button {
 	font-family: 'Nunito', sans-serif;
 	font-size: 1em;
 	margin: 3px;
-	color: #007E7F;
+	color: #5C6666;
 }
 #hiderules {
 	display: block;
