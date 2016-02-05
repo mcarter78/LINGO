@@ -1,5 +1,3 @@
-var answers = ["ghost", "sloth", "crazy"];
-var lengthOfAnswers = answers.length;
 var lengthOfCommonWords = commonwords.length;
 var randomIndex;
 var answer;
@@ -17,7 +15,7 @@ function getRandomInt(min, max) {
   return Math.floor(Math.random() * (max - min)) + min;
 }
 
-//selects an Answer from the array of possible answers in commonwords
+//selects an Answer from the array of possible answers in commonwords2.js
 function selectAnswer() {
 		randomIndex = getRandomInt(0,lengthOfCommonWords);
 		var currentAnswer = commonwords[randomIndex].toLowerCase();
@@ -31,7 +29,7 @@ function fillFirstLetter(answer) {
 	$('.cell:first').html(firstLetter);
 }
 
-//sets up the form for player input where the start button used to be under LINGO title
+//sets up the form for player input and instructions where the start button used to be under LINGO title
 function setUpUserInput(answer){
 	var instructions = '<div class = "legend" id="intro">Here is the first letter! Try to guess the five letter mystery word!</div>';
 	$('#usercontrols').append(instructions);
@@ -110,10 +108,12 @@ function makeGuess() {
 
 	$('#guessbutton').val("Guess Again!");
 	$('#guess').focus();
+	// refocuses back into the text box for next guess
 
 	moveCorrectPlaceLetters();
 	tries ++;
 	correctLettersIndex = [];
+
 	if ((tries > 5) && (guess != answer)) {
 		youLose();
 	}
@@ -144,6 +144,8 @@ function correctLetterCorrectPlace() {
 			$(letterCells[j]).css('background-color', 'rgba(50, 236, 42, 0.7)');
 			$(letterCells[j]).attr('id', 'correctplace');
 			correctLettersIndex.push(j);
+			// this index keeps track of where the correct letters are in the row so 
+			// they can be prompted for you in the next row
 			}
 		}
 	}
@@ -178,7 +180,7 @@ function correctLetterWrongPlace() {
 }
 
 function youLose(){
-	//add a new row that reveals the answer
+	//add a new row that reveals the answer when tries exceeds 5
 	$('.gameboard').append('<div class="row" id="reveal">');
 	for (var i = 0; i < 5; i ++){
 		$('#reveal').append('<div class ="cell">');
